@@ -1,16 +1,10 @@
 import discord
 import eien
 
-def get_role_ids(roles):
-    role_ids = []
-    for role in roles:
-        role_ids.append(role.id)
-    return role_ids
-
 def should_reply(message):
     if (len(message.mentions) < 1):
         return False
-    author_roles = get_role_ids(message.author.roles)
+    author_roles = [role.id for role in message.author.roles]
     if any(role in eien.ALLOWED_ROLES for role in author_roles):
         return False
     mentioned_member = message.mentions[0]
