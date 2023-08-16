@@ -1,5 +1,7 @@
 import discord
-import eien
+#import eien
+ALLOWED_ROLES = [1,2,3]
+TALENTS = [204255221017214977]
 
 def should_reply(message):
     if (len(message.mentions) < 1):
