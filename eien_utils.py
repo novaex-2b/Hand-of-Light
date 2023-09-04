@@ -1,16 +1,14 @@
 import discord
-#import eien
-ALLOWED_ROLES = [1,2,3]
-TALENTS = [204255221017214977]
+import eien
 
 def should_reply(message):
     if (len(message.mentions) < 1):
         return False
     author_roles = [role.id for role in message.author.roles]
-    if any(role in eien.ALLOWED_ROLES for role in author_roles):
+    if any(role in eien.Guild.replies_allowed for role in author_roles):
         return False
     mentioned_member = message.mentions[0]
-    if (mentioned_member.id in eien.TALENTS):
+    if (mentioned_member.id in eien.Guild.talents):
         return True
 
 def ping_reminder_embed():
