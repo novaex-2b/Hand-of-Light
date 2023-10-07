@@ -79,6 +79,23 @@ class _Guild(EnvConfig, env_prefix='guild_'):
 
     moderations_roles: tuple[int,...] = (Roles.staff, Roles.mod_team, Roles.head_mods, Roles.discord_mods, Roles.youtube_mods, Roles.reddit_mods)
     talents: tuple[int, ...] = (Roles.Kiki, Roles.Kilia, Roles.Skye)
-    replies_allowed: tuple[int, ...] = (Roles.staff, Roles.head_mods, Roles.Kiki, Roles.Kilia, Roles.Skye)
+    replies_allowed: tuple[int, ...] = (Roles.staff, Roles.head_mods, Roles.talents)
 
 Guild = _Guild()
+
+class _Placeholders(EnvConfig, env_prefix='placeholder_'):
+    # for stream reminder pings
+    announce_time: str = "YYYY/MM/DD HH:MM Timezone (e.g. 2023/08/17 19:00 BST or 2023/10/21 UTC+8)"
+    announce_url: str = "Provide the URL(s) of the stream(s), separated by newlines, you want to ping for."
+    announce_reminder: str = "Provide the text of the ping for the stream. Type {} where you would like the timestamp inserted."
+
+    # for schedule making
+    schedule_example: str = "YYYY/MM/DD HH:MM~ Stream Name\n2023/08/20 20:00~ Minecraft\n2023/09/07 10:00~ Armored Core"
+    schedule_talent: str = "Provide the name of the talent you are creating the schedule for."
+    schedule_tz: str = "Provide the timezone the talent used for their schedule (e.g. GMT+1 UTC+8)"
+
+    # for auto-replies
+    reply_warning: str = "Please turn off mentions in your replies to any of the talents. See the image below on where to locate this option."
+    mention_img: str = "https://i.imgur.com/1NmLHzF.png"
+
+Placeholders = _Placeholders()
