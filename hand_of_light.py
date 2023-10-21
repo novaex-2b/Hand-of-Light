@@ -7,7 +7,7 @@ import eien
 import eien_utils
 
 load_dotenv()
-TOKEN = os.getenv('TEST_TOKEN')
+TOKEN = os.getenv('PROD_TOKEN')
 
 bot = commands.Bot(command_prefix="#",intents=discord.Intents.all())
 
