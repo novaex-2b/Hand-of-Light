@@ -8,6 +8,7 @@ import eien_utils
 
 load_dotenv()
 TOKEN = os.getenv('PROD_TOKEN')
+#TOKEN = os.getenv('TEST_TOKEN')
 
 bot = commands.Bot(command_prefix="#",intents=discord.Intents.all())
 
@@ -24,13 +25,13 @@ async def on_message(message):
         await message.reply(embed=eien_utils.ping_reminder_embed())
 
 @bot.command()
-@commands.has_any_role(eien.Roles.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 async def sync(ctx):
     await bot.tree.sync()
     await ctx.send('Command tree synced!')
 
 @bot.tree.command(name="reminder")
-@commands.has_any_role(eien.Roles.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 @app_commands.describe(role='the fan role to ping')
 async def reminder(interaction: discord.Interaction, role: discord.Role):
     reminder_modal = eien_utils.Reminder()
@@ -38,7 +39,7 @@ async def reminder(interaction: discord.Interaction, role: discord.Role):
     await interaction.response.send_modal(reminder_modal)
 
 @bot.tree.command(name="schedule")
-@commands.has_any_role(eien.Roles.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 async def schedule(interaction: discord.Interaction):
     schedule_modal = eien_utils.Schedule()
     await interaction.response.send_modal(schedule_modal)

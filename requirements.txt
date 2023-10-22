@@ -3,3 +3,4 @@ discord
 pydantic
 pydantic-settings
 dateparser
+innertube

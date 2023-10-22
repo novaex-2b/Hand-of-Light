@@ -3,6 +3,7 @@ import eien
 from discord import ui
 from dateparser import parse
 from datetime import timedelta
+from innertube import InnerTube
 
 def should_reply(message):
     if (len(message.mentions) < 1):
@@ -21,15 +22,20 @@ def ping_reminder_embed():
 
 class Reminder(ui.Modal, title='Stream Reminder'):
     role = ""
-    stream_time = ui.TextInput(label='Date',placeholder=eien.Placeholders.announce_time)
     stream_url = ui.TextInput(label='URL',placeholder=eien.Placeholders.announce_url)
     reminder_text = ui.TextInput(label='Reminder Caption',style=discord.TextStyle.paragraph,placeholder=eien.Placeholders.announce_reminder)
 
     def set_role(self,role: discord.Role):
         self.role = str(role.id)
 
+    def fetch_stream_time(self):
+        vid_id = str(self.stream_url).split("watch?v=")[1]
+        vid_data = InnerTube("WEB").player(video_id=vid_id)
+        start_time = vid_data["playabilityStatus"]["liveStreamability"]["liveStreamabilityRenderer"]["offlineSlate"]["liveStreamOfflineSlateRenderer"]["scheduledStartTime"]
+        return start_time
+
     async def on_submit(self, interaction: discord.Interaction):
-        time_until = "[<t:" + str(int(parse(str(self.stream_time)).timestamp())) + ":R>](" + str(self.stream_url) + ")"
+        time_until = "[<t:" + self.fetch_stream_time() + ":R>](" + str(self.stream_url) + ")"
         reminder_str = "```\n <@&" + self.role + "> " + str(self.reminder_text).format(time_until) + "\n```"
         em = discord.Embed(description=reminder_str)
         await interaction.response.send_message(embed=em)
