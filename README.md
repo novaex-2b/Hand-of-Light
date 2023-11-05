@@ -6,9 +6,9 @@ Hand of Light is a project to try and make moderation workflows for EIEN Project
 * Auto-reply to messages that keep the mention ping on when replying to talents to remind the user to turn them off.
 * Interactive pop-up to create formatted schedules to pin in talent channels.
 * Interactive pop-up to make creating stream reminders easier (no longer need hammertime).
+* Add tinydb to track occurences of a member pinging a talent in replies
+* Add command to display the above occurences
 
 ## Planned Features
 * Include multi-stream/collab support for stream reminder modal
-* Add tinydb to track occurences of a member pinging a talent in replies
-* Add command to display the above occurences
 
