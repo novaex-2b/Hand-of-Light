@@ -6,10 +6,11 @@ import os
 from dotenv import load_dotenv
 import eien
 import eien_utils
+import time
 
 load_dotenv()
-#TOKEN = os.getenv('PROD_TOKEN')
-TOKEN = os.getenv('TEST_TOKEN')
+TOKEN = os.getenv('PROD_TOKEN')
+#TOKEN = os.getenv('TEST_TOKEN')
 db = TinyDB("db.json")
 searcher = Query()
 
@@ -25,17 +26,17 @@ async def on_message(message):
     if message.author.id == bot.user.id:
         return
     if eien_utils.should_reply(message):
-        db.insert({"username":message.author.display_name,"user_id":message.author.id})
+        db.insert({"username":message.author.display_name,"user_id":message.author.id,"time":int(time.time())})
         await message.reply(embed=eien_utils.ping_reminder_embed())
 
 @bot.command()
-#@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 async def sync(ctx):
     await bot.tree.sync()
     await ctx.send('Command tree synced!')
 
 @bot.tree.command(name="reminder")
-#@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 @app_commands.describe(role='the fan role to ping')
 async def reminder(interaction: discord.Interaction, role: discord.Role):
     reminder_modal = eien_utils.Reminder()
@@ -43,13 +44,13 @@ async def reminder(interaction: discord.Interaction, role: discord.Role):
     await interaction.response.send_modal(reminder_modal)
 
 @bot.tree.command(name="schedule")
-#@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 async def schedule(interaction: discord.Interaction):
     schedule_modal = eien_utils.Schedule()
     await interaction.response.send_modal(schedule_modal)
 
 @bot.tree.command(name="mentionwarns")
-#@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.has_any_role(eien.Guild.moderations_roles)
 @app_commands.describe(user='the user to check')
 async def mention_warns(interaction: discord.Interaction, user: discord.User):
     print(user.id)
