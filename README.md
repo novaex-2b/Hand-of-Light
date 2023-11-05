@@ -9,3 +9,6 @@ Hand of Light is a project to try and make moderation workflows for EIEN Project
 
 ## Planned Features
 * Include multi-stream/collab support for stream reminder modal
+* Add tinydb to track occurences of a member pinging a talent in replies
+* Add command to display the above occurences
+
