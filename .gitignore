@@ -1,4 +1,5 @@
 log
+db.json
 .env
 .bot-env/*
-__pychache__/*
+./__pychache__/*
