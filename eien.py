@@ -64,7 +64,6 @@ class _Roles(EnvConfig, env_prefix='roles_'):
     discord_mods: int = 1081157932114268230 
     youtube_mods: int = 1081158137790349376
     reddit_mods: int = 1094612113063944334
-    dev: int = 320965957369593867
 
     # Talents
     talents: int = 1082796401542574200
@@ -84,7 +83,7 @@ class _Guild(EnvConfig, env_prefix='guild_'):
     invite: str = "https://discord.gg/eienproject"
 
     moderations_roles: tuple[int,...] = (Roles.staff, Roles.mod_team, Roles.head_mods, Roles.discord_mods, Roles.youtube_mods, Roles.reddit_mods)
-    talents: tuple[int, ...] = (Roles.dev, Roles.Kiki, Roles.Kilia, Roles.Skye, Roles.Amora, Roles.Blaise, Roles.Mirri, Roles.Navi, Roles.Zumi)
+    talents: tuple[int, ...] = (Roles.Kiki, Roles.Kilia, Roles.Skye, Roles.Amora, Roles.Blaise, Roles.Mirri, Roles.Navi, Roles.Zumi)
     replies_allowed: tuple[int, ...] = (Roles.staff, Roles.head_mods, Roles.talents)
 
 Guild = _Guild()

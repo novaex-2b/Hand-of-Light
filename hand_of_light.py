@@ -30,13 +30,13 @@ async def on_message(message):
         await message.reply(embed=eien_utils.ping_reminder_embed())
 
 @bot.command()
-@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
 async def sync(ctx):
     await bot.tree.sync()
     await ctx.send('Command tree synced!')
 
 @bot.tree.command(name="reminder")
-@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(role='the fan role to ping')
 async def reminder(interaction: discord.Interaction, role: discord.Role):
     reminder_modal = eien_utils.Reminder()
@@ -44,13 +44,13 @@ async def reminder(interaction: discord.Interaction, role: discord.Role):
     await interaction.response.send_modal(reminder_modal)
 
 @bot.tree.command(name="schedule")
-@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
 async def schedule(interaction: discord.Interaction):
     schedule_modal = eien_utils.Schedule()
     await interaction.response.send_modal(schedule_modal)
 
 @bot.tree.command(name="mentionwarns")
-@commands.has_any_role(eien.Guild.moderations_roles)
+@commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(user='the user to check')
 async def mention_warns(interaction: discord.Interaction, user: discord.User):
     print(user.id)
