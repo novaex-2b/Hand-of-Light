@@ -58,6 +58,19 @@ async def mention_warns(interaction: discord.Interaction, user: discord.User):
     warn_count = len(db.search(searcher.user_id == user.id))
     await interaction.response.send_message(content="That user has been warned {} time(s) for leaving mentions on in replies".format(warn_count))
 
+@bot.tree.command(name="ping")
+@commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
+async def ping(interaction: discord.Interaction):
+    latency = bot.latency * 1000
+    em = None
+    if latency < 51:
+        em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(156,207,216))
+    elif latency < 101:
+        em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(246,193,119))
+    else:
+        em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(235,111,146))
+    await interaction.response.send_message(embed=em)
+
 @bot.tree.command(name="help")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(command='The command to view info for')
