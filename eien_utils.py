@@ -10,12 +10,12 @@ def when_util(datestr):
     if discordtime is not None:
         stamps = ["<t:{}:{}>".format(discordtime.timestamp(),marker) for marker in ['R','t','T','d','D','f','F']]
         em = discord.Embed()
-        em.add_field(name="Input Timezone",value=discordtime.strftime("%Z UTC%z"))
+        em.add_field(name="Input Timezone",value=discordtime.strftime("%Z UTC%z"),inline=False)
         stamp_block = ""
         for stamp in stamps:
             stamp_block = stamp_block + "`{}` {}\n".format(stamp,stamp)
         stamp_block = stamp_block + "Embed displays are automatically converted into the local timezone of the viewer"
-        em.add_field(name="Embed Displays",value=stamp_block)
+        em.add_field(name="Embed Displays",value=stamp_block,inline=False)
         return em
     else:
         em = discord.Embed(description="The input datetime {} is invalid.".format(datestr))
@@ -77,7 +77,7 @@ class Reminder(ui.Modal, title='Stream Reminder'):
         reminder_body = str(self.reminder_text).format(time_until)
         reminder_str = "```\n <@&{}> {}\n```".format(self.role, reminder_body)
         em = discord.Embed(description=reminder_str)
-        await interaction.response.send_message(embed=em)
+        await interaction.response.send_message(embed=em,ephemeral=True)
 
 class Schedule(discord.ui.Modal, title='Schedule Input'):
     name = discord.ui.TextInput(label="Name",placeholder=eien.Placeholders.schedule_talent)
@@ -122,4 +122,4 @@ class Schedule(discord.ui.Modal, title='Schedule Input'):
         em.add_field(name="Input Timezone",value=f"`{self.in_timezone}`")
         em.add_field(name="Parsed Timezone",value=f"`{parsed_tz}`")
         em.add_field(name="Date,Time, and Stream",value=f"```{str(self.in_schedule)}```",inline=False)
-        await interaction.response.send_message(embed = em)
+        await interaction.response.send_message(embed = em,ephemeral=True)

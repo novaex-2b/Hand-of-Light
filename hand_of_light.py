@@ -28,7 +28,7 @@ async def on_message(message):
         return
     if eien_utils.should_reply(message):
         db.insert({"username":message.author.display_name,"user_id":message.author.id,"time":int(time.time())})
-        await message.reply(embed=eien_utils.ping_reminder_embed())
+        await message.reply(embed=eien_utils.ping_reminder_embed(),ephemeral=True)
 
 @bot.command()
 @commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
@@ -56,7 +56,7 @@ async def schedule(interaction: discord.Interaction):
 async def mention_warns(interaction: discord.Interaction, user: discord.User):
     print(user.id)
     warn_count = len(db.search(searcher.user_id == user.id))
-    await interaction.response.send_message(content="That user has been warned {} time(s) for leaving mentions on in replies".format(warn_count))
+    await interaction.response.send_message(content="<@{}> has been warned {} time(s) for leaving mentions on in replies".format(user.id,warn_count))
 
 @bot.tree.command(name="ping")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
@@ -69,20 +69,20 @@ async def ping(interaction: discord.Interaction):
         em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(246,193,119))
     else:
         em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(235,111,146))
-    await interaction.response.send_message(embed=em)
+    await interaction.response.send_message(embed=em,ephemeral=True)
 
 @bot.tree.command(name="when")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(checkdate='The date to get the interval to.')
 async def when(interaction: discord.Interaction, checkdate: str):
     when_embed = eien_utils.when_util(checkdate)
-    await interaction.response.send_message(embed=when_embed)
+    await interaction.response.send_message(embed=when_embed,ephemeral=True)
 
 @bot.tree.command(name="help")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(command='The command to view info for')
 async def help(interaction: discord.Interaction, command: Literal["reminder","schedule","mentionwarns","ping"]=None):
     help_embed = eien_utils.help_embed(command)
-    await interaction.response.send_message(embed=help_embed)
+    await interaction.response.send_message(embed=help_embed,ephemeral=True)
 
 bot.run(TOKEN)
