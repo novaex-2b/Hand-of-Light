@@ -5,6 +5,19 @@ from dateparser import parse
 from datetime import timedelta
 from innertube import InnerTube
 
+def when_util(datestr):
+    discordtime = parse(datestr)
+    if discordtime not None:
+        stamps = ["<:{}:{}>".format(discordtime.timestamp(),marker) for marker in ['R','t','T','d','D','f','F']]
+        em = discord.Embed()
+        em.add_field(name="Input Timezone",value=discordtime.strftime("%Z UTC%z"))
+        stamp_block = ["`{}` {}\n".format(stamp,stamp) for stamp in stamps] + "Embed displays are automatically converted into the local timezone of the viewer."
+        em.add_field(name="Embed Displays",value=stamp_block)
+        return em
+    else:
+        em = discord.Embed(description="The input datetime {} is invalid.".format(datestr))
+        return em
+
 def should_reply(message):
     if (len(message.mentions) < 1):
         return False

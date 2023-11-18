@@ -71,6 +71,13 @@ async def ping(interaction: discord.Interaction):
         em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(235,111,146))
     await interaction.response.send_message(embed=em)
 
+@bot.tree.command(name="when")
+@commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
+@app_commands.describe(checkdate='The date to get the interval to.')
+async def when(interaction: discord.Interaction, checkdate: str):
+    when_embed = eien_utils.when_util(checkdate)
+    await interaction.response.send_message(embed=when_embed)
+
 @bot.tree.command(name="help")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(command='The command to view info for')
