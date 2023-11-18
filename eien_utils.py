@@ -20,6 +20,25 @@ def ping_reminder_embed():
     em.set_image(url=eien.Placeholders.mention_img)
     return em
 
+def help_embed(cmd):
+    if cmd == None:
+        em = discord.Embed(title="Hand of Light Help",description="Use `/help` `[command]` for further information on a command and its arguments. Example: `/help` `schedule`.")
+        em.add_field(name="Available Commands",value="`schedule` • `reminder` • `ping`")
+        return em
+    elif cmd == "schedule":
+        em = discord.Embed(title="Schedule",description=eien.Placeholders.schedule_help)
+        return em
+    elif cmd == "reminder":
+        em = discord.Embed(title="Reminder",description=eien.Placeholders.reminder_help)
+        return em
+    elif cmd == "ping":
+        em = discord.Embed(title="Ping",description="Check the bot's latency.")
+        return em
+    else:
+        em = discord.Embed(title="Error",description="There was an error parsing the entered command.")
+        return em
+
+
 class Reminder(ui.Modal, title='Stream Reminder'):
     role = ""
     stream_url = ui.TextInput(label='URL',placeholder=eien.Placeholders.announce_url)
@@ -35,8 +54,9 @@ class Reminder(ui.Modal, title='Stream Reminder'):
         return start_time
 
     async def on_submit(self, interaction: discord.Interaction):
-        time_until = "[<t:" + self.fetch_stream_time() + ":R>](" + str(self.stream_url) + ")"
-        reminder_str = "```\n <@&" + self.role + "> " + str(self.reminder_text).format(time_until) + "\n```"
+        time_until = "[<t:{}:R>]({})".format(self.fetch_stream_time(),str(self.stream_url))
+        reminder_body = str(self.reminder_text).format(time_until)
+        reminder_str = "```\n <@&{}> {}\n```".format(self.role, reminder_body)
         em = discord.Embed(description=reminder_str)
         await interaction.response.send_message(embed=em)
 

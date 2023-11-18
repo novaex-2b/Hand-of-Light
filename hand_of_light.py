@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from tinydb import TinyDB,Query
+from typing import Literal
 import os
 from dotenv import load_dotenv
 import eien
@@ -56,5 +57,12 @@ async def mention_warns(interaction: discord.Interaction, user: discord.User):
     print(user.id)
     warn_count = len(db.search(searcher.user_id == user.id))
     await interaction.response.send_message(content="That user has been warned {} time(s) for leaving mentions on in replies".format(warn_count))
+
+@bot.tree.command(name="help")
+@commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
+@app_commands.describe(command='The command to view info for')
+async def help(interaction: discord.Interaction, command: Literal["reminder","schedule","mentionwarns"]=None):
+    help_embed = eien_utils.help_embed(command)
+    await interaction.response.send_message(embed=help_embed)
 
 bot.run(TOKEN)

@@ -103,4 +103,56 @@ class _Placeholders(EnvConfig, env_prefix='placeholder_'):
     reply_warning: str = "Please turn off mentions in your replies to any of the talents. See the image below on where to locate this option."
     mention_img: str = "https://i.imgur.com/1NmLHzF.png"
 
+    # for help commands
+    schedule_help: str = """
+Create a schedule for a talent given multiple dates, times, and activities.
+
+**Available Fields:**
+• Name (required)
+• Timezone (required)
+• DateTimes/Activities (required)
+
+**Name** is the name of the talent the schedule is being created for.
+
+**Timezone** is the timezone the given dates are in. Standard abbreviations work. Be aware of regions that use a separate abbreviation for Daylight Saving Time (ex: PDT/PST). UTC offsets will give the best results (ex: UTC+8). GMT offsets are identical to UTC offsets and will also work (ex: GMT+1).
+
+**DateTimes** are the dates and times the given activities will take place. Most human readable formats will parse correctly. The format is assumed to be MMDDYYYY if left ambiguous. 
+
+**Activities** are the events that take place on the given DateTimes. They should not contain special characters (ex: ~*\`_).
+
+**DateTimes** and their corresponding **Activity** are separated by a tilde (~) on the same line.
+
+• **EXAMPLE** • 
+`/schedule`
+`Mirri`
+`gmt+1`
+```
+2023/11/13 23:00~ Superliminal
+11/15 11pm~ Garfield Kart
+thu 11pm~ The Backrooms 1998
+```
+    """
+    reminder_help: str = """
+Create a reminder for a stream for a given talent.
+
+**Available Fields:**
+• Role (required)
+• URL (required)
+• Reminder (required)
+
+• **Syntax**
+`/reminder` `role`
+
+**Role** is the community role belonging to the talent whose stream you are creating the reminder for.
+
+**URL** is the URL to the waiting room of the stream you are creating the reminder for.
+
+**Reminder** is the actual text of the reminder. This will be automatically formatted to insert an embedded hyperlink to the **URL** wherever you type '{}' in the **reminder**.
+
+**Example**
+```
+With the power of anime anything is possible! It just might take a couple of tries... or 12. Lies of P with Miss Blaise continues {}!
+```
+    """
+
 Placeholders = _Placeholders()
