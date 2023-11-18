@@ -84,7 +84,7 @@ class _Guild(EnvConfig, env_prefix='guild_'):
 
     moderations_roles: tuple[int,...] = (Roles.staff, Roles.mod_team, Roles.head_mods, Roles.discord_mods, Roles.youtube_mods, Roles.reddit_mods)
     talents: tuple[int, ...] = (Roles.Kiki, Roles.Kilia, Roles.Skye, Roles.Amora, Roles.Blaise, Roles.Mirri, Roles.Navi, Roles.Zumi)
-    replies_allowed: tuple[int, ...] = (Roles.staff, Roles.head_mods, Roles.talents)
+    replies_allowed: tuple[int, ...] = (Roles.staff, Roles.mod_team, Roles.talents)
 
 Guild = _Guild()
 
