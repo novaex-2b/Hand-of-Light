@@ -61,7 +61,7 @@ async def mention_warns(interaction: discord.Interaction, user: discord.User):
 @bot.tree.command(name="ping")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 async def ping(interaction: discord.Interaction):
-    latency = bot.latency * 1000
+    latency = int(bot.latency * 1000)
     em = None
     if latency < 51:
         em = discord.Embed(title="Pong!",description="The latency is {}ms".format(latency),colour=discord.Colour.from_rgb(156,207,216))
