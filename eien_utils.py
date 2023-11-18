@@ -31,6 +31,9 @@ def help_embed(cmd):
     elif cmd == "reminder":
         em = discord.Embed(title="Reminder",description=eien.Placeholders.reminder_help)
         return em
+    elif cmd == "mentionwarns":
+        em = discord.Embed(title="Mention Warns",description="Check how many times a user has been warned about leaving mentions on when replying to a talent.")
+        return em
     elif cmd == "ping":
         em = discord.Embed(title="Ping",description="Check the bot's latency.")
         return em

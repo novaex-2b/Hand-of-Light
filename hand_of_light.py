@@ -61,7 +61,7 @@ async def mention_warns(interaction: discord.Interaction, user: discord.User):
 @bot.tree.command(name="help")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(command='The command to view info for')
-async def help(interaction: discord.Interaction, command: Literal["reminder","schedule","mentionwarns"]=None):
+async def help(interaction: discord.Interaction, command: Literal["reminder","schedule","mentionwarns","ping"]=None):
     help_embed = eien_utils.help_embed(command)
     await interaction.response.send_message(embed=help_embed)
 
