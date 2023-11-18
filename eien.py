@@ -154,5 +154,19 @@ Create a reminder for a stream for a given talent.
 With the power of anime anything is possible! It just might take a couple of tries... or 12. Lies of P with Miss Blaise continues {}!
 ```
     """
+    mention_warns: str = """
+Check how many times a user has been warned about leaving mentions on when replying to a talent.
+
+**Available Fields:**
+• User (required)
+
+• **Syntax**
+`/mentionwarns` `user`
+
+**User** is the username of the member you would like to check the number of warns for.
+
+**Example**
+`/mentionwarns` `@nova.ex`
+    """
 
 Placeholders = _Placeholders()

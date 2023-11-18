@@ -23,7 +23,7 @@ def ping_reminder_embed():
 def help_embed(cmd):
     if cmd == None:
         em = discord.Embed(title="Hand of Light Help",description="Use `/help` `[command]` for further information on a command and its arguments. Example: `/help` `schedule`.")
-        em.add_field(name="Available Commands",value="`schedule` • `reminder` • `ping`")
+        em.add_field(name="Available Commands",value="`schedule` • `reminder` • `ping` • `mentionwarns`")
         return em
     elif cmd == "schedule":
         em = discord.Embed(title="Schedule",description=eien.Placeholders.schedule_help)
@@ -32,7 +32,7 @@ def help_embed(cmd):
         em = discord.Embed(title="Reminder",description=eien.Placeholders.reminder_help)
         return em
     elif cmd == "mentionwarns":
-        em = discord.Embed(title="Mention Warns",description="Check how many times a user has been warned about leaving mentions on when replying to a talent.")
+        em = discord.Embed(title="Mention Warns",description=eien.Placeholders.mention_warns)
         return em
     elif cmd == "ping":
         em = discord.Embed(title="Ping",description="Check the bot's latency.")
