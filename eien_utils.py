@@ -8,10 +8,13 @@ from innertube import InnerTube
 def when_util(datestr):
     discordtime = parse(datestr)
     if discordtime is not None:
-        stamps = ["<:{}:{}>".format(discordtime.timestamp(),marker) for marker in ['R','t','T','d','D','f','F']]
+        stamps = ["<t:{}:{}>".format(discordtime.timestamp(),marker) for marker in ['R','t','T','d','D','f','F']]
         em = discord.Embed()
         em.add_field(name="Input Timezone",value=discordtime.strftime("%Z UTC%z"))
-        stamp_block = ["`{}` {}\n".format(stamp,stamp) for stamp in stamps] + "Embed displays are automatically converted into the local timezone of the viewer."
+        stamp_block = ""
+        for stamp in stamps:
+            stamp_block = stamp_block + "`{}` {}\n".format(stamp,stamp)
+        stamp_block = stamp_block + "Embed displays are automatically converted into the local timezone of the viewer"
         em.add_field(name="Embed Displays",value=stamp_block)
         return em
     else:
