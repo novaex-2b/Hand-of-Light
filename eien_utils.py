@@ -7,7 +7,7 @@ from innertube import InnerTube
 
 def when_util(datestr):
     discordtime = parse(datestr)
-    if discordtime not None:
+    if discordtime is not None:
         stamps = ["<:{}:{}>".format(discordtime.timestamp(),marker) for marker in ['R','t','T','d','D','f','F']]
         em = discord.Embed()
         em.add_field(name="Input Timezone",value=discordtime.strftime("%Z UTC%z"))
