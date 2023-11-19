@@ -140,7 +140,7 @@ Create a reminder for a stream for a given talent.
 • URL (required)
 • Reminder (required)
 
-• **Syntax**
+**Syntax**
 `/reminder` `role`
 
 **Role** is the community role belonging to the talent whose stream you are creating the reminder for.
@@ -160,13 +160,29 @@ Check how many times a user has been warned about leaving mentions on when reply
 **Available Fields:**
 • User (required)
 
-• **Syntax**
+**Syntax**
 `/mentionwarns` `user`
 
 **User** is the username of the member you would like to check the number of warns for.
 
 **Example**
 `/mentionwarns` `@nova.ex`
+    """
+    when_help: str = """
+Display the duration to a given time and display all embedded versions of that time.
+
+**Available Fields:**
+• checkdate (required) 
+
+**Syntax**
+`/when` `checkdate`
+
+**Checkdate** is the time you would like to find the duration and embedded times for. Most human readable formats will work. This can be an actual date (ex: 11/13 2023 PST) or a duration (ex: in 3 hours). If no timezone is given in the case of an actual date, UTC is assumed.
+
+• EXAMPLE •
+`/when` `in 3 hours`
+`/when` `next week`
+`/when` `2023/11/30 14:00`
     """
 
 Placeholders = _Placeholders()

@@ -50,6 +50,9 @@ def help_embed(cmd):
     elif cmd == "mentionwarns":
         em = discord.Embed(title="Mention Warns",description=eien.Placeholders.mention_warns)
         return em
+    elif cmd == "when":
+        em = discord.Embed(title="When",description=eien.Placeholders.when_help)
+        return em
     elif cmd == "ping":
         em = discord.Embed(title="Ping",description="Check the bot's latency.")
         return em
