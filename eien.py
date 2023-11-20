@@ -177,7 +177,7 @@ Display the duration to a given time and display all embedded versions of that t
 **Syntax**
 `/when` `checkdate`
 
-**Checkdate** is the time you would like to find the duration and embedded times for. Most human readable formats will work. This can be an actual date (ex: 11/13 2023 PST) or a duration (ex: in 3 hours). If no timezone is given in the case of an actual date, UTC is assumed.
+**Checkdate** is the time you would like to find the duration and embedded times for. Most human readable formats will work. This can be an actual date (ex: 11/13 2pm PST) or a duration (ex: in 3 hours). If no timezone is given in the case of an actual date, UTC is assumed.
 
 • EXAMPLE •
 `/when` `in 3 hours`
