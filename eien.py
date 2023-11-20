@@ -182,7 +182,7 @@ Display the duration to a given time and display all embedded versions of that t
 • EXAMPLE •
 `/when` `in 3 hours`
 `/when` `next week`
-`/when` `2023/11/30 14:00`
+`/when` `2023/11/30 14:00 PST`
     """
 
 Placeholders = _Placeholders()
