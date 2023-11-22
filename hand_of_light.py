@@ -90,6 +90,6 @@ async def help(interaction: discord.Interaction, command: Literal["when","remind
 @bot.tree.command(name="blaise")
 @commands.check_any(commands.is_owner(), commands.has_any_role(eien.Guild.moderations_roles))
 async def blaise(interaction: discord.Interaction):
-    await interaction.response.send_message(file="https://cdn.discordapp.com/attachments/1176890901621117018/1176890975294083203/little_shit.mp4?ex=65708422&is=655e0f22&hm=65791d2a23a320f11e27ddf5b72666801a61e765dba2382e079ca486c2510616&")
+    await interaction.response.send_message(file=File("../res/little_shit.mp4"))
 
 bot.run(TOKEN, log_handler=handler)
