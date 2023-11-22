@@ -1,4 +1,5 @@
 import discord
+import traceback
 import eien
 from discord import ui
 from dateparser import parse
@@ -39,7 +40,7 @@ def ping_reminder_embed():
 def help_embed(cmd):
     if cmd == None:
         em = discord.Embed(title="Hand of Light Help",description="Use `/help` `[command]` for further information on a command and its arguments. Example: `/help` `schedule`.")
-        em.add_field(name="Available Commands",value="`schedule` • `reminder` • `ping` • `mentionwarns`")
+        em.add_field(name="Available Commands",value="`schedule` • `reminder` • `ping` • `mentionwarns` • `when`")
         return em
     elif cmd == "schedule":
         em = discord.Embed(title="Schedule",description=eien.Placeholders.schedule_help)
@@ -81,6 +82,10 @@ class Reminder(ui.Modal, title='Stream Reminder'):
         reminder_str = "```\n <@&{}> {}\n```".format(self.role, reminder_body)
         em = discord.Embed(description=reminder_str)
         await interaction.response.send_message(embed=em,ephemeral=True)
+
+    async def on_error(self, interaction: discord.Interaction, error: Exception):
+        await interaction.response.send_message("There was an error processing the input.", ephemeral=True)
+        traceback.print_exception(type(error), error, error.__traceback__)
 
 class Schedule(discord.ui.Modal, title='Schedule Input'):
     name = discord.ui.TextInput(label="Name",placeholder=eien.Placeholders.schedule_talent)
@@ -126,3 +131,7 @@ class Schedule(discord.ui.Modal, title='Schedule Input'):
         em.add_field(name="Parsed Timezone",value=f"`{parsed_tz}`")
         em.add_field(name="Date,Time, and Stream",value=f"```{str(self.in_schedule)}```",inline=False)
         await interaction.response.send_message(embed = em,ephemeral=True)
+
+    async def on_error(self, interaction: discord.Interaction, error: Exception):
+        await interaction.response.send_message("There was an error processing the input.", ephemeral=True)
+        traceback.print_exception(type(error), error, error.__traceback__)
