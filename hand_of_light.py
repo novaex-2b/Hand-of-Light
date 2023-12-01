@@ -30,7 +30,8 @@ async def on_message(message):
         return
     if eien_utils.should_reply(message):
         db.insert({"username":message.author.display_name,"user_id":message.author.id,"time":int(time.time())})
-        await message.reply(embed=eien_utils.ping_reminder_embed(),ephemeral=True)
+        warn_count = len(db.search(searcher.user_id == message.author.id))
+        await message.reply(embed=eien_utils.ping_reminder_embed(warn_count))
 
 @bot.command()
 @commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
@@ -56,7 +57,6 @@ async def schedule(interaction: discord.Interaction):
 @commands.check_any(commands.is_owner(),commands.has_any_role(eien.Guild.moderations_roles))
 @app_commands.describe(user='the user to check')
 async def mention_warns(interaction: discord.Interaction, user: discord.User):
-    print(user.id)
     warn_count = len(db.search(searcher.user_id == user.id))
     await interaction.response.send_message(content="<@{}> has been warned {} time(s) for leaving mentions on in replies".format(user.id,warn_count))
 

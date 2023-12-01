@@ -32,8 +32,13 @@ def should_reply(message):
     if (mentioned_member.id in eien.Guild.talents):
         return True
 
-def ping_reminder_embed():
-    em = discord.Embed(description=eien.Placeholders.reply_warning,colour=discord.Colour.from_rgb(235,111,146))
+def ping_reminder_embed(warn_count):
+    warn_message = ""
+    if warn_count > 1:
+        warn_message = eien.Placeholders.reply_warning_adv
+    else:
+        warn_message = eien.Placeholders.reply_warning
+    em = discord.Embed(description=warn_message,colour=discord.Colour.from_rgb(235,111,146))
     em.set_image(url=eien.Placeholders.mention_img)
     return em
 

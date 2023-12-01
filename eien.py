@@ -101,6 +101,7 @@ class _Placeholders(EnvConfig, env_prefix='placeholder_'):
 
     # for auto-replies
     reply_warning: str = "Please turn off mentions in your replies to any of the talents. See the image below on where to locate this option."
+    reply_warning_adv: str = "Please turn off mentions in your replies to any of the talents. You have been warned of this previously, continued occurencs may result in an official warning."
     mention_img: str = "https://i.imgur.com/1NmLHzF.png"
 
     # for help commands
