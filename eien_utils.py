@@ -1,13 +1,15 @@
 import discord
 import traceback
 import eien
+import pytz
 from discord import ui
 from dateparser import parse
-from datetime import timedelta
+from datetime import timedelta,datetime
 from innertube import InnerTube
 
 def when_util(datestr):
-    discordtime = parse(datestr)
+    relative_base = datetime.now(tzinfo=pytz.timezone('US/Pacific'))
+    discordtime = parse(datestr,settings={'RELATIVE_BASE':relative_base})
     if discordtime is not None:
         stamps = ["<t:{}:{}>".format(int(discordtime.timestamp()),marker) for marker in ['R','t','T','d','D','f','F']]
         em = discord.Embed()
