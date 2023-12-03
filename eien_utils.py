@@ -8,7 +8,7 @@ from datetime import timedelta,datetime
 from innertube import InnerTube
 
 def when_util(datestr):
-    relative_base = datetime.now(tzinfo=pytz.timezone('US/Pacific'))
+    relative_base = datetime.now(pytz.timezone('US/Pacific'))
     discordtime = parse(datestr,settings={'RELATIVE_BASE':relative_base})
     if discordtime is not None:
         stamps = ["<t:{}:{}>".format(int(discordtime.timestamp()),marker) for marker in ['R','t','T','d','D','f','F']]
