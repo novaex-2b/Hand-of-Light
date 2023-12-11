@@ -5,3 +5,5 @@ pydantic-settings
 dateparser
 innertube
 tinydb
+durations_nlp
+pendulum

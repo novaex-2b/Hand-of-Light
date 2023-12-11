@@ -3,12 +3,14 @@ import traceback
 import eien
 import pytz
 from discord import ui
+import dateparser
 from dateparser import parse
 from datetime import timedelta,datetime
 from innertube import InnerTube
 
 def when_util(datestr):
-    relative_base = datetime.now(pytz.timezone('US/Pacific'))
+    _,tz = dateparser.timezone_parser.pop_tz_offset_from_string(datestr)
+    relative_base = datetime.now(tz)
     discordtime = parse(datestr,settings={'RELATIVE_BASE':relative_base})
     if discordtime is not None:
         stamps = ["<t:{}:{}>".format(int(discordtime.timestamp()),marker) for marker in ['R','t','T','d','D','f','F']]
@@ -109,10 +111,11 @@ class Schedule(discord.ui.Modal, title='Schedule Input'):
 
     def parse_schedule(self):
         parsed_schedule = []
+        relative_base = datetime.now(dateparser.utils.get_timezone_from_tz_string(str(self.in_timezone)))
         for stream in str(self.in_schedule).split('\n'):
             stream_time,stream_title = stream.split('~')
             stream_time = stream_time + " " + str(self.in_timezone)
-            parsed_schedule.append((parse(stream_time,settings={'PREFER_DATES_FROM': 'future'}),stream_title))
+            parsed_schedule.append((parse(stream_time,settings={'PREFER_DATES_FROM': 'future','RELATIVE_BASE':relative_base}),stream_title))
         parsed_tz = parsed_schedule[0][0].strftime("UTC%z")
         return parsed_schedule,parsed_tz
 
