@@ -115,7 +115,8 @@ class Schedule(discord.ui.Modal, title='Schedule Input'):
         for stream in str(self.in_schedule).split('\n'):
             stream_time,stream_title = stream.split('~')
             stream_time = stream_time + " " + str(self.in_timezone)
-            parsed_schedule.append((parse(stream_time,settings={'PREFER_DATES_FROM': 'future','RELATIVE_BASE':relative_base}),stream_title))
+            #parsed_schedule.append((parse(stream_time,settings={'PREFER_DATES_FROM': 'future','RELATIVE_BASE':relative_base}),stream_title))
+            parsed_schedule.append((parse(stream_time,settings={'RELATIVE_BASE':relative_base}),stream_title))
         parsed_tz = parsed_schedule[0][0].strftime("UTC%z")
         return parsed_schedule,parsed_tz
 
